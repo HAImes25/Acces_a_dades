@@ -46,6 +46,51 @@ public class Actividad_3 {
                 System.err.println(e.getMessage());
             }
 
+            Scanner reeder = new Scanner(System.in);
+            System.out.println("Cual linea quieres leer?");
+            Boolean permitido = false;
+
+            while (!permitido){
+                try{
+                    int userName = Integer.parseInt(reeder.nextLine());
+                    break;
+                }catch (Exception exception){
+                    System.err.println("Introduzca un numero");
+                    System.out.println("Cual linea quieres leer?");
+                }
+            }
+            Scanner scanner = new Scanner(fichero.getAbsoluteFile());
+            String respuesta = scanner.nextLine();
+
+
+            try (Scanner scannerElegido = new Scanner(fichero.getAbsoluteFile())){
+                int contador = -1;
+                while (scannerElegido.hasNext()){
+
+                    String linea = scanner.nextLine();
+                    int lineaescogida = Integer.parseInt(linea); // Pasar el String a Int
+
+                    int numero = Integer.parseInt(respuesta); // Pasar el String a Int
+                    if (contador == numero){
+                        System.out.println("La linea es " + lineaescogida);
+                    }
+                    contador++;
+
+                }
+            }catch (FileNotFoundException e){
+                System.err.println(e.getMessage());
+            }
+
+
+
+
+
+
+
+
+
+
+
         }catch (IOException ex){
             System.err.println("no se ha creado el fichero");
             System.err.println(ex.getMessage());
