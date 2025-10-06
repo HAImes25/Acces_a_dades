@@ -34,9 +34,9 @@ public class Actividad_3 {
             }
 
             // Read
-            try (Scanner scanner = new Scanner(fichero.getAbsoluteFile())){
-                while (scanner.hasNext()){
-                    String linea = scanner.nextLine();
+            try (Scanner scannerLeer = new Scanner(fichero.getAbsoluteFile())){
+                while (scannerLeer.hasNext()){
+                    String linea = scannerLeer.nextLine();
                     int numero = Integer.parseInt(linea); // Pasar el String a Int
                     if ((numero % 10) == 0){
                         System.out.println(numero);
@@ -46,33 +46,35 @@ public class Actividad_3 {
                 System.err.println(e.getMessage());
             }
 
-            Scanner reeder = new Scanner(System.in);
+            Scanner reederUsuario = new Scanner(System.in);
             System.out.println("Cual linea quieres leer?");
             Boolean permitido = false;
 
             while (!permitido){
                 try{
-                    int userName = Integer.parseInt(reeder.nextLine());
-                    break;
+                    int userRespuesta = Integer.parseInt(reederUsuario.nextLine());
                 }catch (Exception exception){
                     System.err.println("Introduzca un numero");
                     System.out.println("Cual linea quieres leer?");
                 }
+                break;
+
             }
             Scanner scanner = new Scanner(fichero.getAbsoluteFile());
-            String respuesta = scanner.nextLine();
+
 
 
             try (Scanner scannerElegido = new Scanner(fichero.getAbsoluteFile())){
-                int contador = -1;
+                int contador = 0;
                 while (scannerElegido.hasNext()){
 
-                    String linea = scanner.nextLine();
+                    String linea = scannerElegido.nextLine();
                     int lineaescogida = Integer.parseInt(linea); // Pasar el String a Int
 
-                    int numero = Integer.parseInt(respuesta); // Pasar el String a Int
-                    if (contador == numero){
-                        System.out.println("La linea es " + lineaescogida);
+
+                    if (contador == lineaescogida){
+                        String respuesta = scanner.nextLine();
+                        System.out.println(respuesta + "sassssssssssssssss");
                     }
                     contador++;
 
