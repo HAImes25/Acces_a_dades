@@ -47,50 +47,34 @@ public class Actividad_3 {
             }
 
             Scanner reederUsuario = new Scanner(System.in);
-            System.out.println("Cual linea quieres leer?");
-            Boolean permitido = false;
+            System.out.println("¿Qué línea quieres leer?");
+            int userRespuesta = -1;
 
-            while (!permitido){
-                try{
-                    int userRespuesta = Integer.parseInt(reederUsuario.nextLine());
-                }catch (Exception exception){
-                    System.err.println("Introduzca un numero");
-                    System.out.println("Cual linea quieres leer?");
+            while (true) {
+                try {
+                    userRespuesta = Integer.parseInt(reederUsuario.nextLine());
+                    break;
+                } catch (Exception exception) {
+                    System.err.println("Introduzca un número válido.\n");
+                    System.out.println("¿Qué línea quieres leer?");
                 }
-                break;
-
             }
+
             Scanner scanner = new Scanner(fichero.getAbsoluteFile());
 
 
 
-            try (Scanner scannerElegido = new Scanner(fichero.getAbsoluteFile())){
-                int contador = 0;
-                while (scannerElegido.hasNext()){
-
+            try (Scanner scannerElegido = new Scanner(fichero)) {
+                int contador = 1;
+                while (scannerElegido.hasNextLine()) {
                     String linea = scannerElegido.nextLine();
-                    int lineaescogida = Integer.parseInt(linea); // Pasar el String a Int
-
-
-                    if (contador == lineaescogida){
-                        String respuesta = scanner.nextLine();
-                        System.out.println(respuesta + "sassssssssssssssss");
+                    if (contador == userRespuesta) {
+                        System.out.println("La línea " + userRespuesta + " contiene: " + linea);
+                        break;
                     }
                     contador++;
-
                 }
-            }catch (FileNotFoundException e){
-                System.err.println(e.getMessage());
             }
-
-
-
-
-
-
-
-
-
 
 
         }catch (IOException ex){
