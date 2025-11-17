@@ -29,7 +29,7 @@ public class Main {
         //Guardar los bytes en el fichero
 
 
-        //Crear la lista 
+        //Crear la lista
         List<Persona> listaPersonas = new ArrayList<>();
 
         listaPersonas.add(new Persona(1, "Yass", 28));
