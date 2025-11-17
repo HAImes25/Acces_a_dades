@@ -6,13 +6,24 @@ public class Main {
     public static void main(String[] args) {
 
         File file = new File("ficheros/objeto");
-        guardarObjeto(file);
+
+        //Crear la lista
+        List<Persona> listaPersonas = new ArrayList<>();
+
+        listaPersonas.add(new Persona(1, "Yass", 28));
+        listaPersonas.add(new Persona(2, "Ana", 30));
+        listaPersonas.add(new Persona(3, "Luis", 25));
+
+        int idABorrar = 2;
+
+        guardarObjeto(file, (ArrayList<Persona>) listaPersonas);
         recuperarObjeto(file);
+        borrarPersona(file, idABorrar);
     }
 
 
 
-    private static void guardarObjeto(File file){
+    private static void guardarObjeto(File file, ArrayList<Persona> listaPersonas){
 
         //Creamos el fichero, acordaros del try - execption.
         try {
@@ -29,12 +40,6 @@ public class Main {
         //Guardar los bytes en el fichero
 
 
-        //Crear la lista
-        List<Persona> listaPersonas = new ArrayList<>();
-
-        listaPersonas.add(new Persona(1, "Yass", 28));
-        listaPersonas.add(new Persona(2, "Ana", 30));
-        listaPersonas.add(new Persona(3, "Luis", 25));
 
         //Necesitamos todo el sistema para guardar el objeto en un fichero.
         //FileOutputSteam, le tenemos que pasar el fichero --> file
@@ -99,13 +104,13 @@ public class Main {
         try{
             List<Persona> listaPersonas = (List<Persona>) objectInputStream.readObject();
 
-            System.out.println("-------------------------------");
+            System.out.println("------------------------------------");
 
             for (Persona p : listaPersonas) {
                 System.out.println("ID: " + p.getId());
                 System.out.println("Nombre: " + p.getNombre());
                 System.out.println("Edad: " + p.getEdad());
-                System.out.println("-------------------------------");
+                System.out.println("------------------------------------");
 
             }
         }catch (IOException | ClassNotFoundException e){
@@ -121,6 +126,56 @@ public class Main {
             System.err.println(e.getMessage());
             System.exit(-9);
         }
+
+    }
+
+    private static void borrarPersona(File file, int idPersonaABorrar){
+        FileInputStream fileInputStream = null;
+        try{
+            fileInputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e){
+            System.out.println("Error al abrir el FileInputStream" + file.getName());
+            System.out.println(e.getMessage());
+            System.exit(-5);
+        }
+        ObjectInputStream objectInputStream = null;
+        try{
+            objectInputStream = new ObjectInputStream(fileInputStream);
+        }catch (IOException e){
+            System.out.println("Error al crear el ObjectInputStream" + file.getName());
+            System.out.println(e.getMessage());
+            System.exit(-6);
+        }
+        try{
+            List<Persona> listaPersonas = (List<Persona>) objectInputStream.readObject();
+            boolean personaBorrada = false;
+
+
+            for (int i = 0; i < listaPersonas.size(); i++) {
+                if (listaPersonas.get(i).getId() == idPersonaABorrar) {
+                    listaPersonas.remove(i);
+                    personaBorrada = true;
+                    System.out.println("Persona con el ID: " + idPersonaABorrar + ". Ha sido borrada");
+                    break;
+                }
+            }
+            if (personaBorrada == false){
+                System.out.println("No se ha encontrado a nadie con el ID: " + idPersonaABorrar);
+            }
+            if (personaBorrada == true){
+                guardarObjeto(file, (ArrayList<Persona>) listaPersonas);
+                System.out.println("Fichero actualizado ");
+                recuperarObjeto(file);
+            }
+
+
+
+        }catch (IOException | ClassNotFoundException e){
+            System.out.println("Error al recuperar el objeto" + file.getName());
+            System.err.println(e.getMessage());
+            System.exit(-8);
+        }
+
 
     }
 
