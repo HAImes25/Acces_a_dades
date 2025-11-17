@@ -1,55 +1,14 @@
-package ejemplo;
-
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-
     public static void main(String[] args) {
 
-        //Crear el fichero donde guardaremos le objeto
-        File file = new File("escritura/ficheros/objeto");
+        File file = new File("ficheros/objeto");
         guardarObjeto(file);
-
+        recuperarObjeto(file);
     }
-
-    private static void recuperarObjeto(File file){
-        FileInputStream fileInputStream = null;
-        try{
-            fileInputStream = new FileInputStream(file);
-        } catch (FileNotFoundException e){
-            System.out.println("Error al abrir el FileInputStream" + file.getName());
-            System.out.println(e.getMessage());
-            System.exit(-5);
-        }
-        ObjectInputStream objectInputStream = null;
-        try{
-            objectInputStream = new ObjectInputStream(fileInputStream);
-        }catch (IOException e){
-            System.out.println("Error al crear el ObjectInputStream" + file.getName());
-            System.out.println(e.getMessage());
-            System.exit(-6);
-        }
-        try{
-            Persona persona = (Persona) objectInputStream.readObject() ;
-            System.out.println(persona);
-        }catch (IOException | ClassNotFoundException e){
-            System.out.println("Error al recuperar el objeto" + file.getName());
-            System.err.println(e.getMessage());
-            System.exit(-8);
-        }
-        try{
-            objectInputStream.close();
-            fileInputStream.close();
-        }catch (IOException e){
-            System.err.println("Error al cerrar el ObjectInputStream" + file.getName());
-            System.err.println(e.getMessage());
-            System.exit(-9);
-        }
-
-    }
-
-
-
 
 
 
@@ -70,8 +29,12 @@ public class Main {
         //Guardar los bytes en el fichero
 
 
-        //Crear el objeto
-        Persona persona = new Persona(1, "Jass",28, "C/Major 1");
+        //Crear la lista 
+        List<Persona> listaPersonas = new ArrayList<>();
+
+        listaPersonas.add(new Persona(1, "Yass", 28));
+        listaPersonas.add(new Persona(2, "Ana", 30));
+        listaPersonas.add(new Persona(3, "Luis", 25));
 
         //Necesitamos todo el sistema para guardar el objeto en un fichero.
         //FileOutputSteam, le tenemos que pasar el fichero --> file
@@ -99,7 +62,7 @@ public class Main {
         }
 
         try {
-            objectOutputStream.writeObject(persona);
+            objectOutputStream.writeObject(listaPersonas);
         }catch (IOException ex){
             System.err.println("No se ha podido escribir en el Fichero" + file.getName());
             System.err.println(ex.getMessage());
@@ -116,7 +79,50 @@ public class Main {
         }
     }
 
+    private static void recuperarObjeto(File file){
+        FileInputStream fileInputStream = null;
+        try{
+            fileInputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e){
+            System.out.println("Error al abrir el FileInputStream" + file.getName());
+            System.out.println(e.getMessage());
+            System.exit(-5);
+        }
+        ObjectInputStream objectInputStream = null;
+        try{
+            objectInputStream = new ObjectInputStream(fileInputStream);
+        }catch (IOException e){
+            System.out.println("Error al crear el ObjectInputStream" + file.getName());
+            System.out.println(e.getMessage());
+            System.exit(-6);
+        }
+        try{
+            List<Persona> listaPersonas = (List<Persona>) objectInputStream.readObject();
+
+            System.out.println("-------------------------------");
+
+            for (Persona p : listaPersonas) {
+                System.out.println("ID: " + p.getId());
+                System.out.println("Nombre: " + p.getNombre());
+                System.out.println("Edad: " + p.getEdad());
+                System.out.println("-------------------------------");
+
+            }
+        }catch (IOException | ClassNotFoundException e){
+            System.out.println("Error al recuperar el objeto" + file.getName());
+            System.err.println(e.getMessage());
+            System.exit(-8);
+        }
+        try{
+            objectInputStream.close();
+            fileInputStream.close();
+        }catch (IOException e){
+            System.err.println("Error al cerrar el ObjectInputStream" + file.getName());
+            System.err.println(e.getMessage());
+            System.exit(-9);
+        }
+
+    }
 
 
 }
-
