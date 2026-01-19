@@ -50,10 +50,12 @@ public class EscribirFichero {
 
                 case 4:
                     System.out.println("Opcion 4 ");
+                    leerCodigos(file);
                     break;
 
                 case 5:
                     System.out.println("Opcion 5 ");
+                    estadisticas(file);
                     break;
 
                 case 6:
@@ -70,7 +72,7 @@ public class EscribirFichero {
 
     }
 
-    
+
     public static void sobrescribir(File file) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Introduce el texto a guardar: ");
@@ -108,7 +110,85 @@ public class EscribirFichero {
         }
     }
     public static void leerFicheroLetras(File file){
+        try (FileReader fr = new FileReader(file)) {
 
+            int caracter;
+            System.out.println("Contenido del fichero:");
+
+            while ((caracter = fr.read()) != -1) {
+                System.out.print((char) caracter);
+            }
+
+            // Salto de liena para que se vea bien
+            System.out.println();
+
+        } catch (IOException ex) {
+            System.err.println("Error al leer el fichero");
+            ex.printStackTrace();
+        }
+    }
+    private static void leerCodigos(File file) {
+
+        try (FileReader fr = new FileReader(file)) {
+
+            int codigo;
+            System.out.println("Códigos numéricos de los caracteres:");
+
+            while ((codigo = fr.read()) != -1) {
+                System.out.println(codigo);
+            }
+
+        } catch (IOException ex) {
+            System.err.println("Error al leer el fichero");
+            ex.printStackTrace();
+        }
+    }
+    private static void estadisticas(File file) {
+
+        int totalCaracteres = 0;
+        int totalLineas = 0;
+        int vocales = 0;
+        int noAlfabeticos = 0;
+
+        try (FileReader fr = new FileReader(file)) {
+
+            int codigo;
+            while ((codigo = fr.read()) != -1) {
+
+                char c = (char) codigo;
+                totalCaracteres++;
+
+                // Contar líneas
+                if (c == '\n') {
+                    totalLineas++;
+                }
+
+                // Comprobar si es una letra
+                if (Character.isLetter(c)) {
+
+                    char letra = Character.toLowerCase(c);
+                    if (letra == 'a' || letra == 'e' || letra == 'i'
+                            || letra == 'o' || letra == 'u') {
+                        vocales++;
+                    }
+
+                } else {
+                    noAlfabeticos++;
+                }
+            }
+
+        } catch (IOException ex) {
+            System.err.println("Error al leer el fichero");
+            ex.printStackTrace();
+        }
+
+        // Mostrar resultados
+        System.out.println("ESTADÍSTICAS");
+        System.out.println("-------------------------");
+        System.out.println("Total de caracteres: " + totalCaracteres);
+        System.out.println("Total de líneas: " + totalLineas);
+        System.out.println("Número de vocales: " + vocales);
+        System.out.println("Caracteres no alfabéticos: " + noAlfabeticos);
     }
 
 }
