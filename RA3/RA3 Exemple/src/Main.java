@@ -16,19 +16,40 @@ public class Main {
         Path path = Path.of("ficheros/ms.xml");
         File xml = path.toFile();
         try{
-            /*Primeros pasos de configuración*/
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(xml);
 
-            /*Tratar el fichero*/
             NodeList listaInicial = document.getElementsByTagName("Tests").item(0).getChildNodes();
             //System.out.println(listaInicial.toString());
             for (int i = 0; i < listaInicial.getLength(); i++) {
                 Node node = listaInicial.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE){
-
                     System.out.println(node.getNodeName());
+                    NodeList hijos = node.getChildNodes();
+
+                    for (int j = 0; j < hijos.getLength(); j++) {
+                        Node hijo = hijos.item(j);
+
+
+                        if (hijo.getNodeType() == Node.ELEMENT_NODE) {
+                            System.out.println("  Etiqueta: " + hijo.getNodeName());
+
+                            NodeList nietos = hijo.getChildNodes();
+                            for (int k = 0; k < nietos.getLength(); k++) {
+                                Node nieto = nietos.item(k);
+
+
+                                if (nieto.getNodeType() == Node.TEXT_NODE) {
+                                    String texto = nieto.getTextContent().trim();
+                                    if (!texto.isEmpty()) {
+
+                                        System.out.println("    Texto: " + texto);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 //System.out.println(node);
             }
