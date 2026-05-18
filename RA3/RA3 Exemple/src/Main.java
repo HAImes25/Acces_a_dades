@@ -51,7 +51,6 @@ public class Main {
                         }
                     }
                 }
-                //System.out.println(node);
             }
 
         }catch (ParserConfigurationException | SAXException | IOException ex){

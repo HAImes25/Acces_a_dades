@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestLibrary version="1.1">
+  <Suite id="S01" name="Core" owner="QA-Team">
+    <Test TestId="0001" TestType="CMD" difficulty="2" owner="alex" enabled="true">
+      <Name>Convert number to string</Name>
+      <CommandLine>Examp1.EXE</CommandLine>
+      <Params>
+        <Param key="lang">en</Param>
+        <Param key="mode">fast</Param>
+      </Params>
+      <Platforms>
+        <Platform name="windows" status="PASS" durationMs="120"/>
+        <Platform name="linux" status="PASS" durationMs="140"/>
+      </Platforms>
+      <Tags>
+        <Tag>core</Tag>
+        <Tag>text</Tag>
+      </Tags>
+    </Test>
+
+    <Test TestId="0002" TestType="CMD" difficulty="3" owner="unai" enabled="true">
+      <Name>Find succeeding characters</Name>
+      <CommandLine>Examp2.EXE</CommandLine>
+      <Params>
+        <Param key="charset">UTF-8</Param>
+      </Params>
+      <Platforms>
+        <Platform name="windows" status="FAIL" durationMs="210"/>
+        <Platform name="linux" status="PASS" durationMs="190"/>
+      </Platforms>
+      <Tags>
+        <Tag>core</Tag>
+        <Tag>string</Tag>
+      </Tags>
+    </Test>
+
+    <Test TestId="0003" TestType="GUI" difficulty="4" owner="valery" enabled="false">
+      <Name>Login form loads</Name>
+      <CommandLine>OpenApp.exe --screen login</CommandLine>
+      <Platforms>
+        <Platform name="windows" status="PASS" durationMs="980"/>
+        <Platform name="macos" status="SKIP" durationMs="0"/>
+      </Platforms>
+      <Tags>
+        <Tag>ui</Tag>
+        <Tag>smoke</Tag>
+      </Tags>
+    </Test>
+  </Suite>
+
+  <Suite id="S02" name="Payments" owner="Fin-QA">
+    <Test TestId="0101" TestType="API" difficulty="5" owner="aran" enabled="true">
+      <Name>PCI masked PAN in logs</Name>
+      <CommandLine>curl -s http://localhost:8080/payments/logs</CommandLine>
+      <Params>
+        <Param key="pattern">PAN</Param>
+        <Param key="mask">true</Param>
+      </Params>
+      <Platforms>
+        <Platform name="linux" status="PASS" durationMs="330"/>
+      </Platforms>
+      <Tags>
+        <Tag>security</Tag>
+        <Tag>compliance</Tag>
+        <Tag>payments</Tag>
+      </Tags>
+    </Test>
+
+    <Test TestId="0102" TestType="GUI" difficulty="3" owner="alex" enabled="true">
+      <Name>Checkout button visible</Name>
+      <!-- CommandLine missing on purpose -->
+      <Platforms>
+        <Platform name="windows" status="FAIL" durationMs="600"/>
+      </Platforms>
+      <Tags>
+        <Tag>ui</Tag>
+        <Tag>payments</Tag>
+      </Tags>
+    </Test>
+
+    <Test TestId="0103" TestType="CMD" difficulty="1" owner="joan" enabled="true">
+      <Name>Round amount</Name>
+      <CommandLine>rounder</CommandLine>
+      <Platforms>
+        <Platform name="macos" status="PASS" durationMs="55"/>
+        <Platform name="windows" status="PASS" durationMs="60"/>
+      </Platforms>
+      <Tags>
+        <Tag>math</Tag>
+        <Tag>payments</Tag>
+      </Tags>
+    </Test>
+  </Suite>
+
+  <Suite id="S03" name="Infra" owner="Ops">
+    <Test TestId="0201" TestType="CMD" difficulty="2" owner="unai" enabled="true">
+      <Name>Disk space alert threshold</Name>
+      <CommandLine>df -h</CommandLine>
+      <Params>
+        <Param key="mount">/</Param>
+        <Param key="minFreePct">10</Param>
+      </Params>
+      <Platforms>
+        <Platform name="linux" status="PASS" durationMs="80"/>
+      </Platforms>
+      <Tags>
+        <Tag>infra</Tag>
+        <Tag>monitoring</Tag>
+      </Tags>
+    </Test>
+
+    <Test TestId="0202" TestType="API" difficulty="2" owner="valery" enabled="true">
+      <Name>Status endpoint returns 200</Name>
+      <CommandLine>curl -I http://localhost:8080/status</CommandLine>
+      <Platforms>
+        <Platform name="linux" status="PASS" durationMs="40"/>
+        <Platform name="windows" status="PASS" durationMs="45"/>
+      </Platforms>
+      <Tags>
+        <Tag>infra</Tag>
+        <Tag>smoke</Tag>
+      </Tags>
+    </Test>
+  </Suite>
+</TestLibrary>
