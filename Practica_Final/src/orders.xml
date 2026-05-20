@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Stores>
+    <Store id="ST01" name="TechZone">
+        <Order id="ORD001" type="ONLINE" priority="P2" paid="true" customer="alex">
+            <Product>Wireless mouse</Product>
+            <DeliveryNote>Leave at reception</DeliveryNote>
+            <ShippingOptions>
+                <Carrier name="dhl" status="DELIVERED" costCents="450"/>
+                <Carrier name="ups" status="FAILED" costCents="600"/>
+                <Carrier name="local" status="SKIP" costCents="0"/>
+            </ShippingOptions>
+        </Order>
+
+        <Order id="ORD002" type="EXPRESS" priority="P1" paid="true" customer="unai">
+            <Product>Gaming keyboard</Product>
+            <DeliveryNote>Ring the bell</DeliveryNote>
+            <ShippingOptions>
+                <Carrier name="dhl" status="DELIVERED" costCents="500"/>
+                <Carrier name="ups" status="DELIVERED" costCents="650"/>
+                <Carrier name="local" status="SKIP" costCents="0"/>
+            </ShippingOptions>
+        </Order>
+
+        <Order id="ORD003" type="PICKUP" priority="P3" paid="false" customer="valery">
+            <Product>USB-C adapter</Product>
+            <ShippingOptions>
+                <Carrier name="dhl" status="SKIP" costCents="0"/>
+                <Carrier name="ups" status="SKIP" costCents="0"/>
+                <Carrier name="local" status="DELIVERED" costCents="250"/>
+            </ShippingOptions>
+        </Order>
+    </Store>
+
+    <Store id="ST02" name="BookWorld">
+        <Order id="ORD101" type="ONLINE" priority="P4" paid="true" customer="aran">
+            <Product>Java programming book</Product>
+            <DeliveryNote>Deliver after 18:00</DeliveryNote>
+            <ShippingOptions>
+                <Carrier name="dhl" status="FAILED" costCents="430"/>
+                <Carrier name="ups" status="DELIVERED" costCents="550"/>
+                <Carrier name="local" status="SKIP" costCents="0"/>
+            </ShippingOptions>
+        </Order>
+
+        <Order id="ORD102" type="EXPRESS" priority="P2" paid="true" customer="joan">
+            <Product>Notebook pack</Product>
+            <ShippingOptions>
+                <Carrier name="dhl" status="DELIVERED" costCents="380"/>
+                <Carrier name="ups" status="FAILED" costCents="500"/>
+                <Carrier name="local" status="SKIP" costCents="0"/>
+            </ShippingOptions>
+        </Order>
+
+        <Order id="ORD103" type="PICKUP" priority="P3" paid="true" customer="alex">
+            <Product>Manga collection</Product>
+            <DeliveryNote>Pick up before Friday</DeliveryNote>
+            <ShippingOptions>
+                <Carrier name="dhl" status="SKIP" costCents="0"/>
+                <Carrier name="ups" status="SKIP" costCents="0"/>
+                <Carrier name="local" status="DELIVERED" costCents="350"/>
+            </ShippingOptions>
+        </Order>
+    </Store>
+
+    <Store id="ST03" name="HomePlus">
+        <Order id="ORD201" type="ONLINE" priority="P2" paid="true" customer="marta">
+            <Product>Kitchen scale</Product>
+            <DeliveryNote>Call before delivery</DeliveryNote>
+            <ShippingOptions>
+                <Carrier name="dhl" status="DELIVERED" costCents="420"/>
+                <Carrier name="ups" status="DELIVERED" costCents="480"/>
+                <Carrier name="local" status="SKIP" costCents="0"/>
+            </ShippingOptions>
+        </Order>
+
+        <Order id="ORD202" type="ONLINE" priority="P1" paid="false" customer="pau">
+            <Product>Desk lamp</Product>
+            <ShippingOptions>
+                <Carrier name="dhl" status="FAILED" costCents="500"/>
+                <Carrier name="ups" status="DELIVERED" costCents="250"/>
+                <Carrier name="local" status="SKIP" costCents="0"/>
+            </ShippingOptions>
+        </Order>
+    </Store>
+</Stores>

@@ -1,0 +1,18 @@
+=== LLISTAT DE PEDIDOS ===
+[ST01-TechZone] ORD001 | ONLINE  | P2 | true  | alex    | Wireless mouse        | Leave at reception
+
+=== TRANSPORTISTES ===
+FAILED per transportista:
+- dhl: 2
+- ups: 2
+- local: 0
+
+Cost mitjà (cents) sense SKIP:
+- dhl: 446,7 cents
+- ups: 505,0 cents
+- local: 300,0 cents
+
+=== TOP 3 ENVIAMENTS MÉS CARS ===
+#1 ORD002 (ST01-TechZone) - Gaming keyboard - 1150 cents
+#2 ORD001 (ST01-TechZone) - Wireless mouse - 1050 cents
+#3 ORD101 (ST02-BookWorld) - Java programming book - 980 cents
